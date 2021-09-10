@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16-Ago-2021 às 01:09
+-- Tempo de geração: 10-Set-2021 às 14:55
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.2.28
 
@@ -79,15 +79,19 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(50) NOT NULL,
   `fone` varchar(15) NOT NULL,
   `login` varchar(15) NOT NULL,
-  `senha` varchar(15) NOT NULL
+  `senha` varchar(15) NOT NULL,
+  `perfil` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`iduser`, `usuario`, `fone`, `login`, `senha`) VALUES
-(1, 'ANDERSON VANIN', '1199999-9999', 'anderson', '1234');
+INSERT INTO `usuarios` (`iduser`, `usuario`, `fone`, `login`, `senha`, `perfil`) VALUES
+(1, 'Isabelle Damacena', '(11) 97534-2202', 'isabelle', '2345', 'admin'),
+(2, 'Brenda da Silva', '(11) 95233-4792', 'brenda', '2345', 'admin'),
+(3, 'Gilbert Blyte', '(11) 95234-1349', 'gilbert', '2345', 'user'),
+(4, 'Elizabet Bennet', '(11) 99726-3499', 'lizzy', '2345', 'user');
 
 --
 -- Índices para tabelas despejadas
@@ -133,7 +137,7 @@ ALTER TABLE `ordem_servico`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restrições para despejos de tabelas
