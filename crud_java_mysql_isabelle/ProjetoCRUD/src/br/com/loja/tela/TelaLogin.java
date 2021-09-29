@@ -20,11 +20,23 @@ public class TelaLogin extends javax.swing.JFrame {
             
             if(rs.next()){
                 //System.out.println("Agora é o momento de abrir a tela principal");
+                String perfil = rs.getString(6);
+                //System.out.println("Perfil ==> "+perfil);
+                if (perfil.equals("admin")){
                 TelaPrincipal principal = new TelaPrincipal();
                 principal.setVisible(true);
+                TelaPrincipal.MenuRelatorio.setEnabled(true);
+                TelaPrincipal.MenuCadastroUsuarios.setEnabled(true);
+                TelaPrincipal.lblUsuario.setText(rs.getString(2));
                 this.dispose();
-                conexao.close();
-                
+                conexao.close();   
+                }else{
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.setVisible(true);
+                    TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                    this.dispose();
+                    conexao.close();
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "Usuário/Senha Inválidos!");
             }
@@ -66,13 +78,13 @@ public class TelaLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TELA DE LOGIN");
-        setBackground(new java.awt.Color(175, 238, 238));
+        setBackground(new java.awt.Color(230, 230, 250));
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Usuário");
 
-        SENHA.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SENHA.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         SENHA.setText("Senha");
 
         btnLogar.setText("LOGAR");
@@ -96,18 +108,18 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addComponent(btnLogar)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SENHA)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsuario)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))))
-                .addGap(100, 100, 100))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(SENHA, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                            .addComponent(txtSenha))))
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(105, Short.MAX_VALUE)
+                .addContainerGap(127, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -115,9 +127,9 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SENHA))
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(btnLogar)
-                .addGap(44, 44, 44)
+                .addGap(11, 11, 11)
                 .addComponent(lblStatus)
                 .addGap(59, 59, 59))
         );
