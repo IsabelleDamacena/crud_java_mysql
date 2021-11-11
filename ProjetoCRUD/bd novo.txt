@@ -1,0 +1,85 @@
+CREATE DATABASE IF NOT EXISTS `bdlojaetec` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `bdlojaetec`;
+
+
+CREATE TABLE `clientes` (
+  `idcli` int(11) NOT NULL,
+  `nomecli` varchar(50) NOT NULL,
+  `endcli` varchar(100) NOT NULL,
+  `fonecli` varchar(15) NOT NULL,
+  `emailcli` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `clientes` (`idcli`, `nomecli`, `endcli`, `fonecli`, `emailcli`) VALUES
+(1, 'Larissa Costa', 'Rua Paraíso, 81', '1149302848', 'larissa@email.com'),
+(2, 'Sheila Amarantes', 'Avenida Fortuna, 34', '11998948262', 'sheila@email.com'),
+(4, 'Jorge Souza', 'Rua das Pitangas,67', '(11) 95644524', 'jorge@gmail.com'),
+(5, 'Heitor Blythe', 'Rua Avonlea, 21', '(11) 98845345', 'heitor@gmail.com'),
+(6, 'Cida da Silva', 'Rua tr~es, 123456', '7896-6532', 'cida@email.com'),
+(7, 'Joana d\'Arc', 'Av 7 de setembro, 123', '3698-9512', 'joana@email.com');
+
+
+
+CREATE TABLE `ordem_servico` (
+  `os` int(11) NOT NULL,
+  `data_os` timestamp NOT NULL DEFAULT current_timestamp(),
+  `equipamento` varchar(150) NOT NULL,
+  `defeito` varchar(150) NOT NULL,
+  `tecnico` varchar(50) NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `servico` varchar(150) NOT NULL,
+  `idcli` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+INSERT INTO `ordem_servico` (`os`, `data_os`, `equipamento`, `defeito`, `tecnico`, `valor`, `servico`, `idcli`) VALUES
+(1, '2021-07-25 16:48:09', 'COMPUTADOR INTEL I5 - 4G DE RAM - 2T DE HD. COD 1234.5678', 'COMPUTADOR NÃO INICIA VÍDEO.', 'CEBOLINHA', '150.00', 'TROCAR PENTE DE MEMÓRIA. MEMÓRIA EM CURTO.', 1);
+
+
+CREATE TABLE `usuarios` (
+  `iduser` int(11) NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `fone` varchar(15) NOT NULL,
+  `login` varchar(15) NOT NULL,
+  `senha` varchar(15) NOT NULL,
+  `perfil` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+INSERT INTO `usuarios` (`iduser`, `usuario`, `fone`, `login`, `senha`, `perfil`) VALUES
+(1, 'Isabelle Damacena', '(11) 97534-2202', 'isabelle', '2345', 'admin'),
+(2, 'Brenda da Silva', '(11) 95233-4792', 'brenda', '2345', 'admin'),
+(3, 'Gilbert Blyte', '(11) 95234-1349', 'gilbert', '2345', 'user'),
+(4, 'Elizabet Bennet', '(11) 99726-3444', 'lizzy', '2345', 'user'),
+(5, 'Claire Núbia', '(11) 9565-3453', 'claire', '2345', 'user');
+
+
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`idcli`);
+
+
+ALTER TABLE `ordem_servico`
+  ADD PRIMARY KEY (`os`),
+  ADD KEY `idcli` (`idcli`);
+
+
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`iduser`),
+  ADD UNIQUE KEY `login` (`login`);
+
+
+ALTER TABLE `clientes`
+  MODIFY `idcli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+ALTER TABLE `ordem_servico`
+  MODIFY `os` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+
+ALTER TABLE `usuarios`
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+
+ALTER TABLE `ordem_servico`
+ADD CONSTRAINT `ordem_servico_ibfk_1` FOREIGN KEY (`idcli`) REFERENCES `clientes` (`idcli`) ON DELETE CASCADE ON UPDATE CASCADE;

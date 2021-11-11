@@ -144,6 +144,7 @@ public class TelaClientes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
