@@ -56,6 +56,7 @@ public class TelaLogin extends javax.swing.JFrame {
         } else{
             lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/dberror.png")));
         }
+        getRootPane().setDefaultButton(btnLogin);
     }
 
     @SuppressWarnings("unchecked")
