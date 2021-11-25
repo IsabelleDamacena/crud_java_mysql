@@ -6,6 +6,8 @@
 package br.com.loja.telas;
 import java.sql.*;
 import br.com.loja.dal.ModuloConexao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -53,10 +55,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
             pst.setString(1, tipo);
             pst.setString(2, cboSituacao.getSelectedItem().toString());
             pst.setString(3, txtOsEquip.getText());
-            pst.setString(4, txtOsServ.getText());
+            pst.setString(4, txtOsDef.getText());
             pst.setString(5, txtOsTec.getText());
-            pst.setString(4, txtOsValor.getText());
-            pst.setString(4, txtIdCli.getText());
+            pst.setString(6, txtOsValor.getText());
+            pst.setString(7, txtOsServ.getText());
+            pst.setString(8, txtIdCli.getText());
             if (txtIdCli.getText().isEmpty() || txtOsEquip.getText().isEmpty() || txtOsDef.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
             } else {
@@ -73,6 +76,40 @@ public class TelaOS extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+    
+    private void pesquisar_os() throws SQLException{
+    String num_os = JOptionPane.showInputDialog("Número da OS:");
+    String sql = "SELECT * FROM ordem_servico WHERE os ="+ num_os;
+    try {
+        pst = conexao.prepareStatement(sql);
+        rs = pst.executeQuery();
+        if (rs.next()){
+            txtOS.setText(rs.getString(1));
+            txtData.setText(rs.getString(2));
+            String radio_tipo = rs.getString(3);
+            if (radio_tipo.equals("OS")){
+                rbtOs.setSelected(true);
+                tipo = "OS";         
+            } else {
+                rbtOrc.setSelected(true);
+                tipo = "Orçamento";
+            }
+            
+            cboSituacao.setSelectedItem(rs.getString(4));
+            txtOsEquip.setText(rs.getString(5));
+            txtOsDef.setText(rs.getString(6));
+            txtOsTec.setText(rs.getString(7));
+            txtOsValor.setText(rs.getString(8));
+            txtOsServ.setText(rs.getString(9));
+            
+            txtIdCli.setText(rs.getString(10));
+        } else {
+            JOptionPane.showMessageDialog(null,"Ordem de serviço indisponível ou não cadastrada.");
+        }
+    }   catch (Exception e) {
+        JOptionPane.showMessageDialog(null,e);
+    }
     }
     
     /**
@@ -312,6 +349,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
         });
 
         btnOsPesquisar.setText("PESQUISAR");
+        btnOsPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOsPesquisarActionPerformed(evt);
+            }
+        });
 
         btnOsEditar.setText("EDITAR");
 
@@ -414,7 +456,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_rbtOrcActionPerformed
 
     private void txtCliPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCliPesquisarActionPerformed
-        // TODO add your handling code here:
+    pesquisar_cliente();
     }//GEN-LAST:event_txtCliPesquisarActionPerformed
 
     private void txtOsServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOsServActionPerformed
@@ -426,7 +468,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnOsAdicionarActionPerformed
 
     private void txtCliPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCliPesquisarKeyReleased
-    pesquisar_cliente();
+   
     }//GEN-LAST:event_txtCliPesquisarKeyReleased
 
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
@@ -441,6 +483,14 @@ public class TelaOS extends javax.swing.JInternalFrame {
     rbtOrc.setSelected(true);
     tipo = "Orçamento";
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void btnOsPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOsPesquisarActionPerformed
+        try {
+            pesquisar_os();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaOS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnOsPesquisarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
