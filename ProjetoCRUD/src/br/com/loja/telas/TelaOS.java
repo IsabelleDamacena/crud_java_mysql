@@ -112,6 +112,48 @@ public class TelaOS extends javax.swing.JInternalFrame {
     }
     }
     
+    
+    private void alterar(){
+        String sql = "UPDATE ordem_servicos SET tipo=?, situacao=?, equipamento=?, defeito=?, tecnico=?, valor=?, servicos=? WHERE os=?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, tipo);
+            pst.setString(2, cboSituacao.getSelectedItem().toString());
+            pst.setString(3, txtOsEquip.getText());
+            pst.setString(4, txtOsDef.getText());
+            pst.setString(5, txtOsTec.getText());
+            pst.setString(6, txtOsValor.getText().replace(",","."));
+            pst.setString(7, txtOsServ.getText());
+            pst.setString(8, txtOs.getText());
+            
+
+            if (txtIdCli.getText().isEmpty() || txtOsEquip.getText().isEmpty() ||
+                    txtOsDef.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null,"Preencha todos os campos obrigatórios!");
+            } else {
+                int adicionado = pst.executeUpdate();
+                if (adicionado>0){
+                    JOptionPane.showMessageDialog(null,"Dados do usuário alterado com sucesso!");
+                    txtOs.setText(null);
+                    txtData.setText(null);
+                    txtIdCli.setText(null);
+                    txtOsEquip.setText(null);
+                    txtOsDef.setText(null);
+                    txtOsTec.setText(null);
+                    txtOsValor.setText(null);
+                    txtOsServ.setText(null);
+                    btnOsAdicionar.setEnabled(true);
+                    txtCliPesquisar.setEnabled(true);
+                    tblClientes.setEnabled(true);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -150,7 +192,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
         txtOsValor = new javax.swing.JTextField();
         btnOsAdicionar = new javax.swing.JButton();
         btnOsPesquisar = new javax.swing.JButton();
-        btnOsEditar = new javax.swing.JButton();
+        btnOsAlterar = new javax.swing.JButton();
         btnOsDeletar = new javax.swing.JButton();
         btnOsImprimir = new javax.swing.JButton();
 
@@ -355,7 +397,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
             }
         });
 
-        btnOsEditar.setText("EDITAR");
+        btnOsAlterar.setText("ALTERAR");
 
         btnOsDeletar.setText("DELETAR");
 
@@ -402,7 +444,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnOsPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnOsEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnOsAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnOsDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -443,7 +485,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
                     .addComponent(btnOsImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOsAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOsPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOsEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOsAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOsDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
@@ -495,8 +537,8 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOsAdicionar;
+    private javax.swing.JButton btnOsAlterar;
     private javax.swing.JButton btnOsDeletar;
-    private javax.swing.JButton btnOsEditar;
     private javax.swing.JButton btnOsImprimir;
     private javax.swing.JButton btnOsPesquisar;
     private javax.swing.JComboBox<String> cboSituacao;

@@ -84,7 +84,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnOsPesquisar" min="-2" pref="93" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnOsEditar" min="-2" pref="98" max="-2" attributes="0"/>
+                      <Component id="btnOsAlterar" min="-2" pref="98" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnOsDeletar" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -135,7 +135,7 @@
                   <Component id="btnOsImprimir" max="32767" attributes="0"/>
                   <Component id="btnOsAdicionar" max="32767" attributes="0"/>
                   <Component id="btnOsPesquisar" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnOsEditar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnOsAlterar" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnOsDeletar" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -471,9 +471,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOsPesquisarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnOsEditar">
+    <Component class="javax.swing.JButton" name="btnOsAlterar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="EDITAR"/>
+        <Property name="text" type="java.lang.String" value="ALTERAR"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnOsDeletar">

@@ -50,7 +50,6 @@ public class TelaClientes extends javax.swing.JInternalFrame {
             pst.setString(1, txtBuscaCliente.getText() + "%");
             rs = pst.executeQuery();
             tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
-            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
