@@ -12,3 +12,8 @@ São as principais operações feitas nos Bancos de Dados, sendo elas: Insert, u
 
 <h1>Tecnologias</h1>
 <p>JavaScript e MySQL</p>
+
+<h1>Programas</h1>
+<p>JDK 16
+Apache Netbeans IDE 12.4
+Xampp (phpMyAdmin)</p>
