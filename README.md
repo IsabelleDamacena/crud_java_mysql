@@ -1,4 +1,4 @@
-# crud_java_mysql
+# Projeto CRUD com Java e MySQL
 Criação de um sistema CRUD em Java e MySQL
 
 O que é CRUD?
