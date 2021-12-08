@@ -22,7 +22,7 @@ Xampp (phpMyAdmin)</p>
 <h1> Sistema </h1>
 <p>Login</p>
 ![login](https://user-images.githubusercontent.com/64707124/145133806-dab68470-1577-4eeb-9733-848f9a8b345e.png)
-<p>Tela Principal</p>
+
 ![Tela principal](https://user-images.githubusercontent.com/64707124/145134061-3302b7cb-1329-4488-8084-d72ce43d11d2.PNG)
 <p>Tela Clientes</p>
 ![tela Clientes](https://user-images.githubusercontent.com/64707124/145134145-9ef66d00-073a-4a9f-b047-fb2ac14139fb.PNG)
